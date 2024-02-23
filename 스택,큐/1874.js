@@ -11,18 +11,15 @@
 스택을 이용해 그 수열을 만들 수 있는지 없는지, 있다면 어떤 순서로 push와 pop 연산을 수행해야 하는지를 알아낼 수 있다. 이를 계산하는 프로그램을 작성하라.
  */
 
-var fs = require('fs');
-var input = fs.readFileSync('/dev/stdin').toString().split('\n');
-var cases = input[0];
-var arr = [];
-var stack = [];
-var answer = '';
-for(var i=0; i<cases; i++){
-    arr[i] = i+1;
-}
-for(var j=1; j<=cases; j++){ //4
-    	var count = 1;
-        while(count <= cases && stack[stack.length-1] != input[j]){
+
+const input = require('fs').readFileSync('/dev/stdin').toString().split('\n');
+const arr = Array.from({length: input[0]}, (_, i) => i+1);
+const stack = [];
+const answer = '';
+
+for(let j=1; j<= input[0]; j++){ 
+    	const count = 1;
+        while(count <=  input[0] && stack[stack.length-1] != input[j]){
             stack.push(arr.shift());
             answer += '+\n';
             count++;
