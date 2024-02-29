@@ -14,34 +14,53 @@
 선생님이 준 종이의 내용이 주어졌을 때, 상근이의 숙제를 대신하는 프로그램을 작성하시오.
  */
 
+// const input = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n')
+
+// const nums = []
+
+// function isAlphabet(s) {
+//   const ascii = s.charCodeAt(0)
+//   return ascii >= 97 && ascii <= 122
+// }
+
+// for(let i = 1; i < input.length; i++) {
+//   const str = input[i]
+//   let j = 0
+//   let temp = []
+  
+//   while(j < str.length) {
+//     if(isAlphabet(str[j]) && temp.length > 0) {
+//       nums.push(parseInt(temp.join().replaceAll(',', '')))
+//       temp = []
+//     }
+//     if(!isAlphabet(str[j])) {
+//       temp.push(str[j])
+//     }
+//     j++
+//   }
+  
+//   if(temp.length > 0) {
+//     nums.push(parseInt(temp.join().replaceAll(',', '')))
+//   }
+// }
+
+// console.log(nums.sort((a, b) => a-b).join('\n'))
+
+//두번째 방법
 const input = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n')
 
-const nums = []
+function solution(input) {
+  const regExp = /\d+/g;
+  const answer = [];
 
-function isAlphabet(s) {
-  const ascii = s.charCodeAt(0)
-  return ascii >= 97 && ascii <= 122
+  for (let i = 1; i < input.length; i++) {
+    if (input[i].match(regExp)) {
+      answer.push(...input[i].match(regExp));
+    }
+  }
+
+  answer.sort((a, b) => a - b);
+  console.log(answer.map(BigInt).join('\n'));
 }
 
-for(let i = 1; i < input.length; i++) {
-  const str = input[i]
-  let j = 0
-  let temp = []
-  
-  while(j < str.length) {
-    if(isAlphabet(str[j]) && temp.length > 0) {
-      nums.push(parseInt(temp.join().replaceAll(',', '')))
-      temp = []
-    }
-    if(!isAlphabet(str[j])) {
-      temp.push(str[j])
-    }
-    j++
-  }
-  
-  if(temp.length > 0) {
-    nums.push(parseInt(temp.join().replaceAll(',', '')))
-  }
-}
-
-console.log(nums.sort((a, b) => a-b).join('\n'))
+solution(input)
