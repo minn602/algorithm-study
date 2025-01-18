@@ -22,3 +22,33 @@ class Solution {
     return maxLength;
   }
 }
+
+class Solution {
+  /**
+   * @param {string} s
+   * @return {number}
+   */
+  lengthOfLongestSubstring(s) {
+    //without duplicate characters -> valid window is consisting of distinct characters
+    const chars = new Set(); //to check distinc charaters used
+    let l = 0,
+      r = 0; //window indicators
+    let maxLen = 0; //longest length of substring
+
+    while (r < s.length) {
+      const char = s[r];
+
+      while (chars.has(char)) {
+        chars.delete(s[l]);
+        l++;
+        maxLen = Math.max(maxLen, r - l + 1);
+      }
+
+      chars.add(char);
+      maxLen = Math.max(maxLen, r - l + 1);
+      r++;
+    }
+
+    return maxLen;
+  }
+}
